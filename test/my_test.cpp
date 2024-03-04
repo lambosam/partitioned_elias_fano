@@ -12,14 +12,11 @@
 
 #include "my_test.hpp"
 
-// #include "configuration.hpp"
-// #include "util.hpp"
 
 BOOST_AUTO_TEST_CASE(my_test)
 {
     quasi_succinct::global_parameters params;
     using quasi_succinct::indexed_sequence;
-    // using quasi_succinct::strict_sequence;
 
     std::vector<double> avg_gaps = {2, 5, 10, 100, 1000};
     for (auto avg_gap: avg_gaps) {
@@ -34,22 +31,11 @@ BOOST_AUTO_TEST_CASE(my_test)
             auto seq = random_sequence(universe, n, i, true);
             uint64_t seq_size = seq.size() * sizeof(seq[0]);
             double seq_size_bpk = 8.0 / seq.size() * seq_size;
-            // std::cout << "Original size: " << seq_size << " BPK: " << seq_size_bpk << std::endl;
-            // std::cout << "Original size (BPK): " << seq_size_bpk << std::endl;
+
             res_ori.push_back(seq_size_bpk);
             res_ef.push_back(cal_test_positive_sequence<indexed_sequence>(universe, seq));
             res_pef_uni.push_back(cal_test_sequence(quasi_succinct::uniform_partitioned_sequence<indexed_sequence>(), params, universe, seq));
             res_pef_opt.push_back(cal_test_partitioned_sequence<indexed_sequence>(universe, seq));
-
-            // // std::cout << "Original EF Index size (BPK): ";
-            // test_positive_sequence<indexed_sequence>(universe, seq);
-
-            // // std::cout << "Uniform EF Index size (BPK): ";
-            // test_sequence(quasi_succinct::uniform_partitioned_sequence<indexed_sequence>(),
-            //             params, universe, seq);
-            
-            // // std::cout << "Partitioned EF Index size (BPK): ";
-            // test_partitioned_sequence<indexed_sequence>(universe, seq);
         }
         
         std::cout << "Original size (BPK): " << (std::accumulate(res_ori.begin(), res_ori.end(), 0.0) / res_ori.size()) << std::endl;
@@ -57,10 +43,5 @@ BOOST_AUTO_TEST_CASE(my_test)
         std::cout << "Uniform PEF index size (BPK): " << (std::accumulate(res_pef_uni.begin(), res_pef_uni.end(), 0.0) / res_pef_uni.size()) << std::endl;
         std::cout << "Opt PEF index size (BPK): " << (std::accumulate(res_pef_opt.begin(), res_pef_opt.end(), 0.0) / res_pef_opt.size()) << "\n" << std::endl;            
 
-        // std::cout << "FastPFor Index" << std::endl;
-        // test_fastpfor_seqence(universe, seq);
-        
-        // test_sequence(quasi_succinct::uniform_partitioned_sequence<strict_sequence>(),
-        //               params, universe, seq);
     }
 }
