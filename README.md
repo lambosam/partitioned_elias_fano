@@ -92,8 +92,15 @@ A _collection_ consists of 3 files, `<basename>.docs`, `<basename>.freqs`,
   sequence is the size (number of terms) of the i-th document.
 
 
-Authors
+My test
 -------
 
-* Giuseppe Ottaviano <giuott@gmail.com>
-* Rossano Venturini <rossano@di.unipi.it>
+This repo is built on the oririnal repo created by Giuseppe Ottaviano <giuott@gmail.com> & Rossano Venturini <rossano@di.unipi.it>.
+
+The test code is located at the file: /test/my_test.cpp
+
+The test data is generated on the fly, thus we can simply ignore the commands presented in the section "Running the experiments".
+
+Simply run the following command after completing "Building the code".
+
+`$ ./build/test/my_test`
